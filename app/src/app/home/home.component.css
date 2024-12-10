@@ -1,0 +1,70 @@
+.empty{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+h1 {
+  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+  font-family: "Helvetica", sans-serif;
+  padding: 40px 10px;
+  margin: 30px 0;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+main {
+  display: inline-block;
+  /* justify-items: center; */
+  text-align: center;
+}
+
+.card {
+  display: inline-block;
+  margin: 25px;
+  border: 1px solid #2b415433;
+  height: 450px;
+  width: 300px;
+  text-align: center;
+
+}
+
+.card:hover{
+  transform: scale(0.90);
+  transition-duration: 0.5s;
+}
+.perfumeImg {
+  width: 300px;
+}
+
+.brand {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif,
+    sans-serif;
+  display: flex;
+  justify-content: center;
+  font-weight: 300;
+}
+
+.model {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif,
+    sans-serif;
+  display: flex;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.price {
+  margin: 20px 30px;
+  font-family: Helvetica, sans-serif;
+}
+
+

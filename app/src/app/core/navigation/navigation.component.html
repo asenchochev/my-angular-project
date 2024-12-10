@@ -1,0 +1,19 @@
+<header>
+  <nav>
+    <ul *ngIf="!isLoggedIn">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/search">Search</a></li>
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/register">Register</a></li>
+    </ul>
+    <ul *ngIf="isLoggedIn">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/search">Search</a></li>
+      <li><a routerLink="/perfume/create">Create</a></li>
+      <li (click)="logout()"><a>Logout</a></li>
+      <li><a routerLink="/profile">User</a></li>
+    </ul>
+    <a *ngIf="isLoggedIn" routerLink="/cart"><i class="gg-shopping-cart"></i></a>
+
+  </nav>
+</header>

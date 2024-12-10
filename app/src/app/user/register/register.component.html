@@ -1,0 +1,101 @@
+<form class="form" #formRegister="ngForm" (ngSubmit)="register(formRegister)">
+  <p class="form-title">Sign up your own account</p>
+  <div class="input-container">
+    <input
+      placeholder="Enter email"
+      type="text"
+      name="email"
+      #inputEmail="ngModel"
+      ngModel
+      required
+      [appEmail]="appEmailDomains"
+    />
+  </div>
+  <ng-container *ngIf="inputEmail.touched">
+    <p class="error" *ngIf="inputEmail.errors?.['required']">
+      Email is required!
+    </p>
+    <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']">
+      Email is not valid!
+    </p>
+  </ng-container>
+
+  <!-- Telephone -->
+  <div class="input-container">
+    <input
+      placeholder="Enter phonenumber"
+      type="tel"
+      name="phonenumber"
+      ngModel
+      #inputTel="ngModel"
+      required
+      maxlength="15"
+    />
+  </div>
+
+  <ng-container *ngIf="inputTel.touched">
+    <p class="error" *ngIf="inputTel.errors?.['required']">
+      Phonenumber is required!
+    </p>
+    <p class="error" *ngIf="inputTel.errors?.['maxlength']">Numbers must be belou 15</p>
+  </ng-container>
+
+  <!-- Password -->
+  <div class="input-container">
+    <input
+      placeholder="Enter password"
+      type="password"
+      name="password"
+      required
+      minlength="6"
+      ngModel
+      #inputPassword="ngModel"
+    />
+    <ng-container *ngIf="inputPassword.touched">
+      <p class="error" *ngIf="inputPassword.errors?.['required']">
+        Password is required!
+      </p>
+      <p class="error" *ngIf="inputPassword.errors?.['minlength']">
+        Password must have at least 6 characters!
+      </p>
+    </ng-container>
+  </div>
+
+  <!-- Repassword -->
+  <div class="input-container">
+    <input
+    placeholder="Enter password again"
+    type="password"
+    name="rePass"
+    required
+    ngModel
+    minlength="5"
+    #inputRepass="ngModel"
+    appPassMatchValidator="password"
+  />
+  </div>
+
+  <ng-container *ngIf="inputRepass.touched">
+    <p class="error" *ngIf="inputRepass.errors?.['required']">
+      Password is required!
+    </p>
+    <p class="error" *ngIf="inputRepass.errors?.['minlength']">
+      Password must have at least 5 characters!
+    </p>
+    <p class="error" *ngIf="inputRepass.errors?.['passMismatch']">
+      Passwords do not match!
+    </p>
+  </ng-container>
+  <button
+    class="submit"
+    [disabled]="formRegister.invalid"
+    [style]="{ backgroundColor: formRegister.invalid ? 'grey' : 'blue' }"
+  >
+    Sign up
+  </button>
+
+  <p class="signup-link">
+    Already has an acount?
+    <a routerLink="/login">Sign in</a>
+  </p>
+</form>

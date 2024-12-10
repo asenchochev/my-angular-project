@@ -1,0 +1,125 @@
+<form class="form" #form="ngForm" (ngSubmit)="create(form)">
+  <p class="form-title">Create your own product</p>
+  <!-- Brand -->
+  <div class="input-container">
+    <input
+      placeholder="Enter brand"
+      type="text"
+      name="brand"
+      #inputBrand="ngModel"
+      ngModel
+      required
+    />
+    <!--[appEmail]="appEmailDomains"-->
+  </div>
+  <ng-container *ngIf="inputBrand.touched">
+    <p class="error" *ngIf="inputBrand.errors?.['required']">
+      Brand is required!
+    </p>
+  </ng-container>
+
+  <!-- Model -->
+  <div class="input-container">
+    <input
+      placeholder="Enter model"
+      type="text"
+      name="model"
+      #inputModel="ngModel"
+      ngModel
+      required
+    />
+    <!--[appEmail]="appEmailDomains"-->
+  </div>
+  <ng-container *ngIf="inputModel.touched">
+    <p class="error" *ngIf="inputModel.errors?.['required']">
+      Model is required!
+    </p>
+  </ng-container>
+
+  <!-- Amount -->
+  <div class="input-container">
+    <input
+      placeholder="Enter amount"
+      type="number"
+      name="amount"
+      ngModel
+      #inputAmount="ngModel"
+      required
+      maxlength="3"
+      min="1"
+    />
+  </div>
+
+  <ng-container *ngIf="inputAmount.touched">
+    <p class="error" *ngIf="inputAmount.errors?.['required']">
+      Amount is required!
+    </p>
+    <p class="error" *ngIf="inputAmount.errors?.['min']">
+      Numbers must be positive
+    </p>
+  </ng-container>
+
+  <div class="input-container">
+    <input
+      placeholder="Enter a valid imageUrl"
+      type="text"
+      name="imageUrl"
+      required
+      ngModel
+      #inputImageUrl="ngModel"
+      appImageUrl
+    />
+    <ng-container *ngIf="inputImageUrl.touched">
+      <p class="error" *ngIf="inputImageUrl.errors?.['required']">
+        ImageUrl is required!
+      </p>
+      <p class="error" *ngIf="inputImageUrl.errors?.['appImageUrlValidator']">
+        ImageUrl is incorrect!
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="input-container">
+    <input
+      placeholder="Enter a price for one perfume"
+      type="number"
+      name="price"
+      required
+      ngModel
+      #inputPrice="ngModel"
+    />
+    <ng-container *ngIf="inputPrice.touched">
+      <p class="error" *ngIf="inputPrice.errors?.['required']">
+        Price is required!
+      </p>
+      <p class="error" *ngIf="inputPrice.errors?.['required']">
+        Price must be positive number!
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="input-container">
+    <textarea
+      name="description"
+      id="description"
+      placeholder="description"
+      ngModel
+      #inputDescription="ngModel"
+      required
+      minlength="10"
+    >
+    </textarea>
+  </div>
+
+  <button
+    class="submit"
+    [disabled]="form.invalid"
+    [style]="{ backgroundColor: form.invalid ? 'grey' : 'blue' }"
+  >
+    Create
+  </button>
+
+  <p class="signup-link">
+    <a routerLink="/home">Return to home</a>
+  </p>
+</form>

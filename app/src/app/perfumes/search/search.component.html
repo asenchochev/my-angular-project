@@ -1,0 +1,40 @@
+<h1>Search page</h1>
+
+<form class="form" #formSearch="ngForm" (ngSubmit)="search(formSearch)">
+  <div class="input-container">
+    <input
+      placeholder="Search by brand"
+      type="text"
+      name="brand"
+      ngModel
+      #inputSearch="ngModel"
+      required
+    />
+  </div>
+  <ng-container *ngIf="inputSearch.touched">
+    <p class="error" *ngIf="inputSearch.errors?.['required']">
+      Search text is required!
+    </p>
+    
+  </ng-container>
+  <button [disabled]="formSearch.invalid"
+  [style]="{ backgroundColor: formSearch.invalid ? 'grey' : 'blue' }" class="submit">Search</button>
+</form>
+
+<div *ngIf="isLoading"><app-loader /></div>
+
+<main *ngIf="!isLoading">
+  <div class="card" *ngFor="let p of perfumesList">
+    <a [routerLink]="['/home', p._id]">
+      <img
+        src="{{ p.imageUrl }}"
+        alt=""
+        onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
+        class="perfumeImg"
+      />
+      <h3 class="model">{{ p.brand }}</h3>
+      <h4 class="brand">{{ p.model }}</h4>
+      <div class="price">{{ p.price | currency : "BGN" }}</div>
+    </a>
+  </div>
+</main>

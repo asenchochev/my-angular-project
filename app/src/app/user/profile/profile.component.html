@@ -1,0 +1,96 @@
+<h1>Profile page</h1>
+<div class="loader" *ngIf="isLoading">
+  <app-loader />
+</div>
+
+<div class="userInfo" *ngIf="!isLoading">
+  <form #userForm="ngForm" (ngSubmit)="editProfile(userForm)">
+    <div class="input-container">
+      <label for="email">Email</label>
+      <input
+        autocomplete="off"
+        placeholder="Enter email"
+        name="email"
+        type="email"
+        ngModel
+        [ngModel]="creator?.email"
+        #inputEmail="ngModel"
+        required
+        [appEmail]="appEmailDomains"
+
+      />
+    </div>
+    <ng-container *ngIf="inputEmail.touched">
+      <p class="error" *ngIf="inputEmail.errors?.['required']">
+        Email is required!
+      </p>
+      <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']">
+        Email is not valid!
+      </p>
+    </ng-container>
+    <div class="input-container">
+        <label for="phonenumber">Phonenumber</label>
+      <input
+        placeholder="Enter phonenumber"
+        type="tel"
+        name="phonenumber"
+        [ngModel]="creator?.phonenumber"
+        #inputTel="ngModel"
+        required
+      />
+    </div>
+    <ng-container *ngIf="inputTel.touched">
+      <p class="error" *ngIf="inputTel.errors?.['required']">
+        Phonenumber is required!
+      </p>
+      
+    </ng-container>
+    <div class="input-container">
+      <label for="password">Password</label>
+      <input
+        autocomplete="off"
+        placeholder="Enter password"
+        name="password"
+        type="password"
+        [ngModel]
+        required
+        #inputPassword="ngModel"
+        minlength="5"
+      />
+    </div>
+    <ng-container *ngIf="inputPassword.touched">
+      <p class="error" *ngIf="inputPassword.errors?.['required']">
+        Password is required!
+      </p>
+      <p class="error" *ngIf="inputPassword.errors?.['minlength']">
+        {{inputPassword.errors?.['minlength']['requiredLength']}} characters!
+      </p>
+    </ng-container>
+    <button class="submit" [disabled]="userForm.invalid"
+    [style]="{ backgroundColor: userForm.invalid ? 'grey' : 'blue' }">Edit</button>
+  </form>
+  <div class="message">
+    These are yours ({{ creator?.email }}'s) perfume posts. If you want to edit
+    any of the posts, just choose one and press it.
+  </div>
+</div>
+
+<!-- <div *ngIf="isEmpty">Sorry! Nothing is here...</div> -->
+
+<div *ngIf="!isLoading">
+  <main>
+    <div class="card" *ngFor="let p of perfumesList">
+      <a [routerLink]="['/home', p._id]">
+        <img
+          src="{{ p.imageUrl }}"
+          alt=""
+          onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
+          class="perfumeImg"
+        />
+        <h3 class="model">{{ p.brand }}</h3>
+        <h4 class="brand">{{ p.model }}</h4>
+        <div class="price">{{ p.price | currency : "BGN" }}</div>
+      </a>
+    </div>
+  </main>
+</div>

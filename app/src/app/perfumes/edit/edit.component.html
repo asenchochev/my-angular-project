@@ -1,0 +1,126 @@
+<form class="form" #formEdit="ngForm" (ngSubmit)="edit(formEdit)">
+  <p class="form-title">Edit your own product</p>
+  <!-- Brand -->
+  <div class="input-container">
+    <input
+      value="{{ perfume?.brand }}"
+      placeholder="Enter brand"
+      type="text"
+      name="brand"
+      #inputBrand="ngModel"
+      [ngModel]="perfume?.brand"
+    />
+    <!--[appEmail]="appEmailDomains"-->
+  </div>
+  <ng-container *ngIf="inputBrand.touched">
+    <p class="error" *ngIf="inputBrand.errors?.['required']">
+      Brand is required!
+    </p>
+  </ng-container>
+
+  <!-- Model -->
+  <div class="input-container">
+    <input
+      value="{{ perfume?.model }}"
+      placeholder="Enter model"
+      type="text"
+      name="model"
+      #inputModel="ngModel"
+      [ngModel]="perfume?.model"
+    />
+    <!--[appEmail]="appEmailDomains"-->
+  </div>
+  <ng-container *ngIf="inputModel.touched">
+    <p class="error" *ngIf="inputModel.errors?.['required']">
+      Model is required!
+    </p>
+  </ng-container>
+
+  <!-- Amount -->
+  <div class="input-container">
+    <input
+      value="{{ perfume?.amount }}"
+      placeholder="Enter amount"
+      type="number"
+      name="amount"
+      [ngModel]="perfume?.amount"
+      #inputAmount="ngModel"
+      maxlength="3"
+      required
+      min="1"
+    />
+  </div>
+
+  <ng-container *ngIf="inputAmount.touched">
+    <p class="error" *ngIf="inputAmount.errors?.['required']">
+      Amount is required!
+    </p>
+    <p class="error" *ngIf="inputAmount.errors?.['min']">
+      Numbers must be positive
+    </p>
+  </ng-container>
+
+  <!-- Password -->
+  <div class="input-container">
+    <input
+      value="{{ perfume?.imageUrl }}"
+      placeholder="Enter a valid imageUrl"
+      type="text"
+      name="imageUrl"
+      [ngModel]="perfume?.imageUrl"
+      #inputImageUrl="ngModel"
+      required
+    />
+    <ng-container *ngIf="inputImageUrl.touched">
+      <p class="error" *ngIf="inputImageUrl.errors?.['required']">
+        ImageUrl is required!
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="input-container">
+    <input
+      value="{{ perfume?.price }}"
+      placeholder="Enter a price for one perfume"
+      type="number"
+      name="price"
+      [ngModel]="perfume?.price"
+      required
+      #inputPrice="ngModel"
+    />
+    <ng-container *ngIf="inputPrice.touched">
+      <p class="error" *ngIf="inputPrice.errors?.['required']">
+        Price is required!
+      </p>
+      <p class="error" *ngIf="inputPrice.errors?.['required']">
+        Price must be positive number!
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="input-container">
+    <textarea
+      value="{{ perfume?.description }}"
+      name="description"
+      id="description"
+      placeholder="description"
+      #inputDescription="ngModel"
+      minlength="10"
+      required
+      [ngModel]="perfume?.description"
+    >
+    </textarea>
+  </div>
+
+  <button
+    class="submit"
+    [disabled]="formEdit.invalid"
+    [style]="{ backgroundColor: formEdit.invalid ? 'grey' : 'blue' }"
+  >
+    Edit
+  </button>
+
+  <p class="signup-link">
+    <a routerLink="/home">Return to home</a>
+  </p>
+</form>
