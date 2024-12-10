@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import roleRoute from './routes/role.js';
 import authRoute from './routes/auth.js';
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
 
 app.use(express.json());
