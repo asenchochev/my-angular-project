@@ -1,16 +1,18 @@
 import Role from "../models/Role.js";
+import { CreateError } from "../utils/error.js";
+import { createSuccess } from "../utils/success.js";
 
 export const createRole = async (req, res) => {
     try {
         if(req.body.role && req.body.role !== ''){
             const newRole = new Role(req.body);
             await newRole.save();
-            return res.send('Role Created!')
-        } else{
-            return res.status(404).send("Bad Request!");
+            return next(createSuccess(200, "Role Created!"))
+        } else{ 
+            return next(CreateError(400, "Bad Request"));
         }
     } catch (error) {
-        return res.status(500).send('Internal Server Error!')
+        return next(CreateError(500, "Internal Server Error!"));
     }
 }
 
